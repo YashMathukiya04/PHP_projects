@@ -79,7 +79,7 @@
     }
 
     $query = "SELECT * FROM home_visit"; 
-    // Assuming your table name is 'home_visit'
+    //  table name is 'home_visit'
     $result = mysqli_query($con, $query);
 
     if (mysqli_num_rows($result) > 0) {
@@ -95,8 +95,9 @@
                 <th>Gender</th>
                 <th>Delete</th>
               </tr>";
-
+        $id = 0;
         while ($row = mysqli_fetch_assoc($result)) {
+            $id = $id +1;
             echo "<tr>";
             echo "<td>" . $row['id'] . "</td>";
             echo "<td>" . $row['therapy_type'] . "</td>";

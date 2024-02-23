@@ -18,7 +18,7 @@ if(isset($_POST['submit'])){
     if($result){
         echo "<script>alert('Success!');</script>";
     }
-    header("location: http://localhost/wellcare/cont.php");
+    header("location: http://localhost//wellcare/cont.php");
 }
     mysqli_close($con);
 ?>

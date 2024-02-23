@@ -16,7 +16,8 @@
         $sarnamu = $_POST["p_area"];
         $gender = $_POST["gender"];
 
-        $res = mysqli_query($con,"INSERT INTO home_visit(therapy_type,name,email,pain_type,mobile,address,gender) VALUES('{$paintype}','{$name}','{$email}','{$pain}','{$mobile}','{$sarnamu}','{$gender}')");
+        $res = mysqli_query($con,
+        "INSERT INTO home_visit(therapy_type,name,email,pain_type,mobile,address,gender) VALUES('{$paintype}','{$name}','{$email}','{$pain}','{$mobile}','{$sarnamu}','{$gender}')");
 
         if($res){
             echo "<script>alert('Success');</script>";

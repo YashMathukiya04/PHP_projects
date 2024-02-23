@@ -5,6 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="//cdn.datatables.net/2.0.0/css/dataTables.dataTables.min.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/2.0.0/js/dataTables.min.js">
     <title>CRUD</title>
 </head>
 
@@ -25,8 +28,41 @@
             <button type="submit" name="submit" class="btn btn-primary" id="submit">Submit</button>
         </form>
     </div>
+  
+<table class="table table-striped">
+  <thead>
+      <th scope="row">display </th>
+    <tr>
+      <th scope="col">Serial No</th>
+      <th scope="col">Title</th>
+      <th scope="col">Description</th>
+      <th scope="col">Delete</th>
+      <th scope="col">Update</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php
+        include("include.php");
 
-   
+         $sql = "SELECT * FROM notes";
+         $result = mysqli_query($conn, $sql);
+
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo"
+                    <tr>
+                        <th scope='row'>". $row['sno'] ."</th>
+                          <td>". $row['title'] ."</td>
+                          <td>". $row['description'] ."</td>
+                          <td></td>
+                          <td></td>
+                    </tr> 
+                ";
+                echo "<br/>";
+            }
+       ?>    
+  </tbody>
+</table>
+
 
 </body>
 

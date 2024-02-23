@@ -96,46 +96,48 @@
     </form>
 </body>
 </html>
+
+
 <?php
-// Database connection (adjust connection details)
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "wellcare"; // Database name
+        // Database connection (adjust connection details)
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "wellcare"; // Database name
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+        $conn = new mysqli($servername, $username, $password, $dbname);
 
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-if (isset($_POST['therapy_id'])) {
-    $therapy_id = $_POST['therapy_id'];
-
-    // Fetch the therapy image file path from the database
-    $sql = "SELECT therapy_image FROM therapy WHERE therapy_id = $therapy_id";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $imageFilePath = $row['therapy_image'];
-
-        // Delete the therapy record from the database
-        $deleteSql = "DELETE FROM therapy WHERE therapy_id = $therapy_id";
-        if ($conn->query($deleteSql) === TRUE) {
-            // Delete the image file
-            if (file_exists($imageFilePath)) {
-                unlink($imageFilePath); // Delete the image file
-            }
-            echo "Therapy with ID $therapy_id deleted successfully.";
-        } else {
-            echo "Error deleting therapy: " . $conn->error;
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
         }
-    } else {
-        echo "Therapy with ID $therapy_id not found.";
-    }
-}
 
-// Close the database connection
-$conn->close();
+        if (isset($_POST['therapy_id'])) {
+            $therapy_id = $_POST['therapy_id'];
+
+            // Fetch the therapy image file path from the database
+            $sql = "SELECT therapy_image FROM therapy WHERE therapy_id = $therapy_id";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                $imageFilePath = $row['therapy_image'];
+
+                // Delete the therapy record from the database
+                $deleteSql = "DELETE FROM therapy WHERE therapy_id = $therapy_id";
+                if ($conn->query($deleteSql) === TRUE) {
+                    // Delete the image file
+                    if (file_exists($imageFilePath)) {
+                        unlink($imageFilePath); // Delete the image file
+                    }
+                    echo "Therapy with ID $therapy_id deleted successfully.";
+                } else {
+                    echo "Error deleting therapy: " . $conn->error;
+                }
+            } else {
+                echo "Therapy with ID $therapy_id not found.";
+            }
+        }
+
+        // Close the database connection
+        $conn->close();
 ?>
